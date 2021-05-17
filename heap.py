@@ -12,9 +12,30 @@ class MaxHeap():
         self.count += 1
         return 
 
-    def heapify_up():
-        print("Heapifying up")
+    def heapify_up(self):
+        return print("Heapifying up")
+        
 
-test = MaxHeap("test")
-test.add({"sweep": 1})
-test.add({"vacuum": 2})
+    def heapify_down(self):
+        return print("Heapifying down")
+
+
+    def remove(self):
+        if self.count == 0:
+            print(f"{self.name} is empty")
+            return 
+        elif self.count == 1:
+           removed = self.heap_list.pop()
+           print(f"{removed} removed, {self.name} is now empty")
+           self.count -= 1
+           return removed
+        else:
+           first = self.heap_list[1]
+           last = self.heap_list[-1]
+           self.heap_list[1] = last
+           self.heap_list[-1] = first
+           removed = self.heap_list.pop()
+           self.heapify_down
+           self.count -= 1
+           print(f"Congradulations! {first} removed from {self.name}. {self.heap_list[1]} is your new highest priority.")
+           return removed
