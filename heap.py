@@ -6,14 +6,28 @@ class MaxHeap():
     
     def add(self, value):
         self.heap_list.append(value)
+        print(f"{value} added to {self.name}")
+        self.count += 1
         if self.heap_list[1] != value:
             self.heapify_up()
-        print(f"{value} added to {self.name}, {self.heap_list}")
-        self.count += 1
+        
         return 
 
     def heapify_up(self):
-        return print("Heapifying up")
+        print("Heapifying up")
+        idx = self.count
+        while self.parent_idx(idx) > 0:
+            child = self.heap_list[idx]
+            for key in child:
+                child_key = key 
+            parent = self.heap_list[self.parent_idx(idx)]
+            for key in parent:
+                parent_key = key
+            if parent[parent_key] < child[child_key]:
+                self.heap_list[idx] = parent
+                self.heap_list[self.parent_idx(idx)] = child
+            idx = self.parent_idx(idx)
+        print(f"{self.name} reorganized. {self.heap_list[1]} is currently the highest priority.")
         
 
     def heapify_down(self):
@@ -26,7 +40,7 @@ class MaxHeap():
             return 
         elif self.count == 1:
            removed = self.heap_list.pop()
-           print(f"{removed} removed, {self.name} is now empty")
+           print(f"{removed} removed, Hoorah! {self.name} is now empty")
            self.count -= 1
            return removed
         else:
