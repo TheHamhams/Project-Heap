@@ -10,8 +10,7 @@ class MaxHeap():
         self.count += 1
         if self.heap_list[1] != value:
             self.heapify_up()
-        
-        return 
+     
 
     def heapify_up(self):
         print("Heapifying up")
@@ -31,10 +30,27 @@ class MaxHeap():
         
 
     def heapify_down(self):
-        return print("Heapifying down")
+        print("Heapifying down")
+        idx = 1
+        while self.child_present(idx):
+            larger_child_idx = self.get_larger_child_idx(idx)
+            child = self.heap_list[larger_child_idx]
+            for key in child:
+                child_key = key
+            parent = self.heap_list[idx]
+            for key in parent:
+                parent_key = key
+            if parent[parent_key] < child[child_key]:
+                self.heap_list[idx] = child
+                self.heap_list[larger_child_idx] = parent
+            idx = larger_child_idx
+        
+
+    def get_larger_child_idx(self, idx):
+        pass
 
 
-    def remove(self):
+    def remove_max(self):
         if self.count == 0:
             print(f"{self.name} is empty")
             return 
