@@ -13,7 +13,6 @@ class MaxHeap():
      
 
     def heapify_up(self):
-        print("Heapifying up")
         idx = self.count
         while self.parent_idx(idx) > 0:
             child = self.heap_list[idx]
@@ -29,8 +28,7 @@ class MaxHeap():
         print(f"{self.name} reorganized. {self.heap_list[1]} is currently the highest priority.")
         
 
-    def heapify_down(self):
-        idx = 1
+    def heapify_down(self, idx=1):
         while self.child_present(idx):
             larger_child_idx = self.get_larger_child_idx(idx)
             child = self.heap_list[larger_child_idx]
@@ -43,6 +41,36 @@ class MaxHeap():
                 self.heap_list[idx] = child
                 self.heap_list[larger_child_idx] = parent
             idx = larger_child_idx
+
+    def remove_by_key(self, remove_key):
+        if self.count == 0:
+            print(f"{self.name} is empty")
+            return
+        keys = []
+        for element in self.heap_list:
+            if element != None:
+                for key in element:
+                    keys.append(key)
+        if remove_key not in keys:
+            print(f"{remove_key} is not in {self.name}")
+            return 
+        idx = keys.index(remove_key) + 1
+        if self.count == 1:
+           removed = self.heap_list.pop()
+           print(f"{removed} removed, Hoorah! {self.name} is now empty")
+           self.count -= 1
+           return removed
+        else:
+           target = self.heap_list[idx]
+           last = self.heap_list[-1]
+           self.heap_list[idx] = last
+           self.heap_list[-1] = target
+           removed = self.heap_list.pop()
+           self.count -= 1
+           self.heapify_down()
+           self.heapify_up()
+           self.print_heap()
+           return removed
         
 
     def get_larger_child_idx(self, idx):
@@ -71,6 +99,7 @@ class MaxHeap():
            self.count -= 1
            return removed
         else:
+           print(self.heap_list)
            first = self.heap_list[1]
            last = self.heap_list[-1]
            self.heap_list[1] = last
@@ -95,7 +124,7 @@ class MaxHeap():
 
     def print_heap(self):
         heap_copy = MaxHeap("copy")
-        heap_copy.heap_list = self.heap_list
+        heap_copy.heap_list = self.heap_list.copy()
         heap_copy.count = self.count
         lst = []
         while heap_copy.count > 0:
