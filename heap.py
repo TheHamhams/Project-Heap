@@ -47,7 +47,19 @@ class MaxHeap():
         
 
     def get_larger_child_idx(self, idx):
-        pass
+        if self.right_child_idx(idx) > self.count:
+            return self.left_child_idx(idx)
+        else:
+            left_child = self.heap_list[self.left_child_idx(idx)]
+            for key in left_child:
+                left_child_key = key
+            right_child = self.heap_list[self.right_child_idx(idx)]
+            for key in right_child:
+                right_child_key = key
+            if left_child[left_child_key] > right_child[right_child_key]:
+                return self.left_child_idx(idx)
+            else:
+                return self.right_child_idx(idx)
 
 
     def remove_max(self):
@@ -65,8 +77,8 @@ class MaxHeap():
            self.heap_list[1] = last
            self.heap_list[-1] = first
            removed = self.heap_list.pop()
-           self.heapify_down()
            self.count -= 1
+           self.heapify_down()
            print(f"Congradulations! {first} removed from {self.name}. {self.heap_list[1]} is your new highest priority.")
            return removed
     
