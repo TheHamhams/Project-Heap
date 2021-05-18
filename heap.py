@@ -4,6 +4,7 @@ class MaxHeap():
         self.heap_list = [None]
         self.name = name
     
+    # adds value to desired heap and heapifys up
     def add(self, value):
         self.heap_list.append(value)
         print(f"{value} added to {self.name}")
@@ -11,14 +12,15 @@ class MaxHeap():
         if self.heap_list[1] != value:
             self.heapify_up()
      
-
+    # brings element up to appropriate position in the heap
     def heapify_up(self):
         idx = self.count
         while self.parent_idx(idx) > 0:
             child = self.heap_list[idx]
+            parent = self.heap_list[self.parent_idx(idx)]
+            # loops create key variables for the parent and child
             for key in child:
                 child_key = key 
-            parent = self.heap_list[self.parent_idx(idx)]
             for key in parent:
                 parent_key = key
             if parent[parent_key] < child[child_key]:
@@ -27,14 +29,15 @@ class MaxHeap():
             idx = self.parent_idx(idx)
         print(f"{self.name} reorganized. {self.heap_list[1]} is currently the highest priority.")
         
-
+    # brings element down to appropriate position in the heap
     def heapify_down(self, idx=1):
         while self.child_present(idx):
             larger_child_idx = self.get_larger_child_idx(idx)
             child = self.heap_list[larger_child_idx]
+            parent = self.heap_list[idx]
+            # loops create key variables for the parent and child
             for key in child:
                 child_key = key
-            parent = self.heap_list[idx]
             for key in parent:
                 parent_key = key
             if parent[parent_key] < child[child_key]:
@@ -47,6 +50,7 @@ class MaxHeap():
             print(f"{self.name} is empty")
             return
         keys = []
+        # loop adds keys to the keys list
         for element in self.heap_list:
             if element != None:
                 for key in element:
@@ -61,6 +65,7 @@ class MaxHeap():
            self.count -= 1
            return removed
         else:
+           # target replaces the first variable from the remove_max method to target the desired key
            target = self.heap_list[idx]
            last = self.heap_list[-1]
            self.heap_list[idx] = last
@@ -123,6 +128,7 @@ class MaxHeap():
         return self.left_child_idx(idx) <= self.count
 
     def print_heap(self):
+        # a copy of the heap is created to make use of the heapify method
         heap_copy = MaxHeap("copy")
         heap_copy.heap_list = self.heap_list.copy()
         heap_copy.count = self.count
@@ -135,6 +141,7 @@ class MaxHeap():
                 removed = heap_copy.heap_list.pop()
                 heap_copy.count -= 1
                 lst.append(removed)
+            # modified remove_max method that replaces self.heap_list with the copy version
             else:
                 first = heap_copy.heap_list[1]
                 last = heap_copy.heap_list[-1]
