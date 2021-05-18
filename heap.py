@@ -30,7 +30,6 @@ class MaxHeap():
         
 
     def heapify_down(self):
-        print("Heapifying down")
         idx = 1
         while self.child_present(idx):
             larger_child_idx = self.get_larger_child_idx(idx)
@@ -93,3 +92,27 @@ class MaxHeap():
 
     def child_present(self, idx):
         return self.left_child_idx(idx) <= self.count
+
+    def print_heap(self):
+        heap_copy = MaxHeap("copy")
+        heap_copy.heap_list = self.heap_list
+        heap_copy.count = self.count
+        lst = []
+        while heap_copy.count > 0:
+            if heap_copy.count == 0:
+                print(f"{self.name} is empty")
+                return 
+            elif heap_copy.count == 1:
+                removed = heap_copy.heap_list.pop()
+                heap_copy.count -= 1
+                lst.append(removed)
+            else:
+                first = heap_copy.heap_list[1]
+                last = heap_copy.heap_list[-1]
+                heap_copy.heap_list[1] = last
+                heap_copy.heap_list[-1] = first
+                removed = heap_copy.heap_list.pop()
+                heap_copy.count -= 1
+                heap_copy.heapify_down()
+                lst.append(removed)
+        print(lst)
