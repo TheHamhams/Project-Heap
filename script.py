@@ -1,15 +1,32 @@
 from heap import MaxHeap
 
-test = MaxHeap("test")
+def program_start():
+    print("Welcome ot the program tracker, what would you like to do?")
+    
+    while True:
+        try:
+            start = input("""
+            'create': create a new project list
+            'delete': delete list
+            'select': select a list to view or edit
+            'exit': exit program
+            """)
+            if start.lower() == 'create':
+                print("You chose create")
+                break
+            elif start.lower() == 'delete':
+                print("you chose delete")
+                break
+            elif start.lower() == 'select':
+                print("You chose select")
+                break
+            elif start.lower() == 'exit':
+                print("bye bye")
+                break
+            else:
+                print("I didn't recognize that, please try again.")
+        except:
+            continue
 
-test.add({"sweep": 1})
-test.add({"vacuum": 2})
-test.add({"dust": 5})
-test.add({"iron": 3})
-test.add({"eat": 4})
-test.add({"sleep": 2})
-test.add({"run": 7})
-test.remove_by_key("iron")
-test.remove_max()
-test.remove_by_key("sleep")
+program_start()
 
