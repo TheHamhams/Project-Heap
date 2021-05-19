@@ -19,11 +19,12 @@ def program_start():
                 print("you chose delete")
                 break
             elif start.lower() == 'select':
-                print("You chose select")
+                print_projects()
+                program_start()
                 break
             elif start.lower() == 'exit':
                 print("bye bye")
-                break
+                return 
             else:
                 print("I didn't recognize that, please try again.")
         except:
@@ -36,13 +37,18 @@ def create_list():
         program_start()
     else:
         confirm = input(f"You chose to name your list {name}, is that correct?(yes/no)")
-        if confirm == 'yes':
-            project_lists.append(MaxHeap(name))
+        if confirm.lower() == 'yes':
+            project_lists.append(MaxHeap(name.lower()))
             print(f"{name} created!")
             program_start()
-        if confirm == 'no':
+        else:
             create_list()
-
+        
+def print_projects():
+    lst = []
+    for node in project_lists:
+        lst.append(node.name)
+    print(lst)
 
 program_start()
 
