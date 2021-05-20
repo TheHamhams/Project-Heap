@@ -30,12 +30,7 @@ def select_menu():
         if response.lower() == heap.name:
             print(f"You selected '{heap.name}'.")
             idx = project_lists.index(heap)
-            confirm = input(f"\nYou chose '{response}', is this correct?(yes/no)")
-            if confirm.lower() == "yes":
-                return edit_menu(project_lists[idx])
-            else:
-                select_menu()
-        
+            return edit_menu(project_lists[idx])
     print(f"I'm sorry, I don't see '{response}', please try again.")
     select_menu()
 
@@ -50,19 +45,24 @@ def edit_menu(heap):
     'remove other': remove a specific project
     'other': select another list
     'back': go back to main menu
+    'exit': exit program
 
     """)
     response = input("")
     if response.lower() == 'add':
         add_project(heap)
     elif response.lower() == 'remove first':
-        pass
+        heap.remove_max()
+        edit_menu(heap)
     elif response.lower() == 'remove other':
-        pass
+        remove_other(heap)
     elif response.lower() == 'other':
         select_menu()
     elif response.lower() == 'back':
         program_start()
+    elif response.lower() == 'exit':
+        print('bye bye')
+        exit()
     else:
         edit_menu(heap)
 
@@ -74,10 +74,8 @@ def add_project(heap):
         value = int(value)
     else:
         add_project(heap)
-    
-    
-    confirm_value = input(f"You have entered the project '{key}' with an importance of '{value}', is this correct? (yes/no)")
-    if confirm_value.lower() != 'yes':
+    confirm = input(f"You have entered the project '{key}' with an importance of '{value}', is this correct? (yes/no)")
+    if confirm.lower() != 'yes':
         add_project(heap)
     heap.add({key: value})
     more = input(f"Would you like to add another project to '{heap.name}'? (yes/no)")
@@ -93,6 +91,17 @@ def check_int(input):
     except ValueError:
         print("Sorry, that wasnt a number")
         return False
+
+def remove_other(heap):
+    heap.print_heap()
+    response = input("Which project would you like to delete?")
+    heap.remove_by_key(response.lower())
+    more = input("Would you like to remove another project? (yes/no)")
+    if more.lower() == 'yes':
+        remove_other(heap)
+    else:
+        edit_menu(heap)
+
 def create_list():
     print("You chose create a new list")
     name = input("What should the name of your new list be?\nTo go back to the main menu type 'back'\n")
