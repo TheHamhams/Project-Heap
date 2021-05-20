@@ -4,30 +4,25 @@ project_lists = []
 
 def program_start():
     print("Welcome ot the program tracker, what would you like to do?")
-    
-    while True:
-        try:
-            start = input("""
-            'create': create a new project list
-            'delete': delete list
-            'select': select a list to view or edit
-            'exit': exit program
-            """)
-            if start.lower() == 'create':
-                create_list()
-            elif start.lower() == 'delete':
-               delete_menu()
-            elif start.lower() == 'select':
-                print_projects()
-                program_start()
-                break
-            elif start.lower() == 'exit':
-                print("bye bye")
-                return 
-            else:
-                print("I didn't recognize that, please try again.")
-        except:
-            continue
+    start = input("""
+    'create': create a new project list
+    'delete': delete list
+    'select': select a list to view or edit
+    'exit': exit program
+    """)
+    if start.lower() == 'create':
+        create_list()
+    elif start.lower() == 'delete':
+        delete_menu()
+    elif start.lower() == 'select':
+        print_projects()
+        program_start()
+    elif start.lower() == 'exit':
+        print("bye bye")
+        exit()
+    else:
+        print("I didn't recognize that, please try again.")
+        program_start()
 
 def create_list():
     print("You chose create a new list")
@@ -72,5 +67,6 @@ test = MaxHeap("test")
 project_lists.append(test)
 test.add({"sweep": 3})
 test.add({"shop": 7})
+
 program_start()
 
