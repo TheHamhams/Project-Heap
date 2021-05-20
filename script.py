@@ -25,13 +25,45 @@ def program_start():
 
 def select_menu():
     print_projects()
-    selection = input("Which list would you like to select?")
-    for project in project_lists:
-        if selection.lower() == project.name:
-            print(f"You selected '{project.name}'.")
-        else:
-            print(f"I'm sorry, I don't see '{selection}', please try again.")
-            select_menu()
+    response = input("Which list would you like to select?")
+    for heap in project_lists:
+        if response.lower() == heap.name:
+            print(f"You selected '{heap.name}'.")
+            idx = project_lists.index(heap)
+            confirm = input(f"\nYou chose '{response}', is this correct?(yes/no)")
+            if confirm.lower() == "yes":
+                return edit_menu(project_lists[idx])
+            else:
+                select_menu()
+        
+    print(f"I'm sorry, I don't see '{response}', please try again.")
+    select_menu()
+
+def edit_menu(heap):
+    print(heap.name)
+    heap.print_heap()
+    print("""
+    What would you like to do?
+
+    'add': add a project to the list
+    'remove first': remove first project on the list
+    'remove other': remove a specific project
+    'other': select another list
+    'back': go back to main menu
+
+    """)
+    response = input("")
+    if response.lower() == 'add':
+        pass
+    elif response.lower() == 'remove first':
+        pass
+    elif response.lower() == 'remove other':
+        pass
+    elif response.lower() == 'other':
+        select_menu()
+    elif response.lower() == 'back':
+        program_start()
+
 
 def create_list():
     print("You chose create a new list")
