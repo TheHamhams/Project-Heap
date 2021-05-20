@@ -15,14 +15,23 @@ def program_start():
     elif start.lower() == 'delete':
         delete_menu()
     elif start.lower() == 'select':
-        print_projects()
-        program_start()
+        select_menu()
     elif start.lower() == 'exit':
         print("bye bye")
         exit()
     else:
         print("I didn't recognize that, please try again.")
         program_start()
+
+def select_menu():
+    print_projects()
+    selection = input("Which list would you like to select?")
+    for project in project_lists:
+        if selection.lower() == project.name:
+            print(f"You selected '{project.name}'.")
+        else:
+            print(f"I'm sorry, I don't see '{selection}', please try again.")
+            select_menu()
 
 def create_list():
     print("You chose create a new list")
@@ -43,6 +52,7 @@ def print_projects():
     for node in project_lists:
         lst.append(node.name)
     print(lst)
+    
 
 def delete_menu():
     print("Which list would you like to delete?\nenter 'back' to go back to the main menu\n")
