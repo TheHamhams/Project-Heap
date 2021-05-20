@@ -54,7 +54,7 @@ def edit_menu(heap):
     """)
     response = input("")
     if response.lower() == 'add':
-        pass
+        add_project(heap)
     elif response.lower() == 'remove first':
         pass
     elif response.lower() == 'remove other':
@@ -63,8 +63,36 @@ def edit_menu(heap):
         select_menu()
     elif response.lower() == 'back':
         program_start()
+    else:
+        edit_menu(heap)
 
-
+def add_project(heap):
+    key = input("What is the name of the project?")
+    value = input(f"How important is '{key}' (higher values are more important than lower)")
+    
+    if check_int(value) == True:
+        value = int(value)
+    else:
+        add_project(heap)
+    
+    
+    confirm_value = input(f"You have entered the project '{key}' with an importance of '{value}', is this correct? (yes/no)")
+    if confirm_value.lower() != 'yes':
+        add_project(heap)
+    heap.add({key: value})
+    more = input(f"Would you like to add another project to '{heap.name}'? (yes/no)")
+    if more.lower() == 'yes':
+        add_project(heap)
+    else:
+        edit_menu(heap)
+     
+def check_int(input):
+    try:
+        val = int(input)
+        return True
+    except ValueError:
+        print("Sorry, that wasnt a number")
+        return False
 def create_list():
     print("You chose create a new list")
     name = input("What should the name of your new list be?\nTo go back to the main menu type 'back'\n")
