@@ -16,8 +16,7 @@ def program_start():
             if start.lower() == 'create':
                 create_list()
             elif start.lower() == 'delete':
-                print("you chose delete")
-                break
+               delete_menu()
             elif start.lower() == 'select':
                 print_projects()
                 program_start()
@@ -50,5 +49,28 @@ def print_projects():
         lst.append(node.name)
     print(lst)
 
+def delete_menu():
+    print("Which list would you like to delete?\nenter 'back' to go back to the main menu")
+    print_projects()
+    response = input("")
+    if response.lower() == "back":
+        program_start()
+    else:
+        for heap in project_lists:
+            if heap.name == response.lower():
+                idx = project_lists.index(heap)
+                confirm = input(f"You chose {response}, is this correct?(yes/no)")
+                if confirm.lower() == "yes":
+                    project_lists.pop(idx)
+                    print(f"{response} deleted")
+                    program_start()
+                
+        print(f"{response} not found, please try again")
+        delete_menu()
+
+test = MaxHeap("test")
+project_lists.append(test)
+test.add({"sweep": 3})
+test.add({"shop": 7})
 program_start()
 
