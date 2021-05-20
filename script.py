@@ -30,10 +30,10 @@ def create_list():
     if name.lower() == 'back':
         program_start()
     else:
-        confirm = input(f"You chose to name your list {name}, is that correct?(yes/no)")
+        confirm = input(f"\nYou chose to name your list '{name}', is that correct?(yes/no)")
         if confirm.lower() == 'yes':
             project_lists.append(MaxHeap(name.lower()))
-            print(f"{name} created!")
+            print(f"\n'{name}' created!")
             program_start()
         else:
             create_list()
@@ -45,7 +45,7 @@ def print_projects():
     print(lst)
 
 def delete_menu():
-    print("Which list would you like to delete?\nenter 'back' to go back to the main menu")
+    print("Which list would you like to delete?\nenter 'back' to go back to the main menu\n")
     print_projects()
     response = input("")
     if response.lower() == "back":
@@ -54,13 +54,13 @@ def delete_menu():
         for heap in project_lists:
             if heap.name == response.lower():
                 idx = project_lists.index(heap)
-                confirm = input(f"You chose {response}, is this correct?(yes/no)")
+                confirm = input(f"\nYou chose '{response}', is this correct?(yes/no)")
                 if confirm.lower() == "yes":
                     project_lists.pop(idx)
-                    print(f"{response} deleted")
+                    print(f"\n'{response}' deleted\n")
                     program_start()
                 
-        print(f"{response} not found, please try again")
+        print(f"\n'{response}' not found, please try again")
         delete_menu()
 
 test = MaxHeap("test")
