@@ -70,7 +70,7 @@ def add_project(heap):
     key = input("What is the name of the project?")
     value = input(f"How important is '{key}' (higher values are more important than lower)")
     
-    if check_int(value) == True:
+    if is_int(value):
         value = int(value)
     else:
         add_project(heap)
@@ -84,7 +84,7 @@ def add_project(heap):
     else:
         edit_menu(heap)
      
-def check_int(input):
+def is_int(input):
     try:
         val = int(input)
         return True
